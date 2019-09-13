@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://trunangst:Snyperwolfz8!@devconnector-k3yjs.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://trunangst:Snyperwolfz8!@devconnector-k3yjs.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "secretToken"
 }
