@@ -55,6 +55,7 @@ const EditProfile = props => {
         });
     }, [loading, getCurrentProfile]);
     // ^^^ will constantly reload: depends on [loading] prop ^^^
+    // if add profile.bio, profile.company.... it wont let us edit the fields, ignore warning
 
     const {
         company,
