@@ -13,7 +13,7 @@ const Experience = props => {
             <td>{exp.company}</td>
             <td className='hide-sm'>{exp.title}</td>
             <td>
-                <Moment format='YYYY/MM/DD'>{exp.from}</Moment> -{' '}
+                <Moment format='YYYY/MM/DD'>{exp.from}</Moment> &ndash;{' '}
                 {exp.to === null ? (
                     ' Now'
                 ) : (

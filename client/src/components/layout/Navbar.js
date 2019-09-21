@@ -7,12 +7,14 @@ import { logout } from '../../actions/auth';
 const Navbar = props => {
     const { isAuthenticated, loading } = props.auth;
     const { logout } = props;
-    console.log(props);
 
     const authLinks = (
         <ul>
             <li>
                 <Link to='/profiles'>Developers</Link>
+            </li>
+            <li>
+                <Link to='/posts'>Posts</Link>
             </li>
             <li>
                 <Link to='/dashboard'>
