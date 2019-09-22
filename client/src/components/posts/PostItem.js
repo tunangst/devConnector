@@ -11,10 +11,14 @@ const PostItem = props => {
     return (
         <div className='post bg-white p-1 my-1'>
             <div>
-                <a href='profile.html'>
-                    <img className='round-img' src={avatar} alt='' />
+                <Link to={`/profile/${user}`}>
+                    <img
+                        className='round-img'
+                        src={avatar}
+                        alt='avatar of author'
+                    />
                     <h4>{name}</h4>
-                </a>
+                </Link>
             </div>
             <div>
                 <p className='my-1'>{text}</p>
