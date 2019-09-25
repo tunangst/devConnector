@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://trunangst:Snyperwolfz8!@devconnector-k3yjs.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "secretToken",
+    "githubClientId": "b7b214ff6ba165d8043c",
+    "githubSecret": "c1359654a86abd831facfaa1f297fdcdc8cc8bcb"
+}
