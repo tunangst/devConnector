@@ -23,7 +23,6 @@ const Login = props => {
     const onSubmit = async element => {
         element.preventDefault();
         login(email, password);
-        console.log('success');
     };
 
     //redirect if logged in

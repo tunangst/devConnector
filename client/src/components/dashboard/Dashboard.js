@@ -9,7 +9,6 @@ import Experience from './Experience';
 import Education from './Education';
 
 const Dashboard = props => {
-    console.log(props);
     const {
         deleteAccount,
         getCurrentProfile,
@@ -20,7 +19,6 @@ const Dashboard = props => {
         getCurrentProfile();
     }, [getCurrentProfile]);
 
-    console.log(profile);
     return loading && profile === null ? (
         <Spinner />
     ) : (
