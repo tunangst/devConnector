@@ -16,7 +16,7 @@ const Post = props => {
     } = props;
     useEffect(() => {
         getPost(match.params.id);
-    }, [getPost]);
+    }, [getPost, match.params.id]);
 
     return loading || post === null ? (
         <Spinner />
