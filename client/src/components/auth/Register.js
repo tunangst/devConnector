@@ -36,6 +36,7 @@ const Register = props => {
     };
 
     if (isAuthenticated) {
+        //
         return <Redirect to='/dashboard' />;
     }
 

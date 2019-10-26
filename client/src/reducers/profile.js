@@ -16,6 +16,7 @@ const initialState = {
 };
 const profile = (state = initialState, action) => {
     const { type, payload } = action;
+    // console.log(payload);
 
     switch (type) {
         case GET_PROFILE:
@@ -47,6 +48,7 @@ const profile = (state = initialState, action) => {
             return {
                 ...state,
                 profile: null,
+                profiles: [],
                 repos: [],
                 loading: false
             };

@@ -15,6 +15,7 @@ const Dashboard = props => {
         auth: { user },
         profile: { profile, loading }
     } = props;
+
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
@@ -30,8 +31,12 @@ const Dashboard = props => {
             {profile !== null ? (
                 <Fragment>
                     <DashboardActions />
-                    <Experience experience={profile.experience} />
-                    <Education education={profile.education} />
+                    {profile.experience ? (
+                        <Experience experience={profile.experience} />
+                    ) : null}
+                    {profile.education ? (
+                        <Education education={profile.education} />
+                    ) : null}
 
                     <div className='my-2'>
                         <button
