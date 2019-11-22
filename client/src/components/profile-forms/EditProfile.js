@@ -1,20 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 
-//component state instead of universal state
-//const [name of state, name of call to change state] = useState({initial state})
-const EditProfile = props => {
-    const {
-        profile: { profile, loading },
-        createProfile,
-        getCurrentProfile,
-        history
-    } = props;
-
+const EditProfile = ({
+    profile: { profile, loading },
+    createProfile,
+    getCurrentProfile,
+    history
+}) => {
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -40,7 +35,7 @@ const EditProfile = props => {
             website: loading || !profile.website ? '' : profile.website,
             location: loading || !profile.location ? '' : profile.location,
             status: loading || !profile.status ? '' : profile.status,
-            skills: loading || !profile.skills ? '' : profile.skills,
+            skills: loading || !profile.skills ? '' : profile.skills.join(','),
             githubusername:
                 loading || !profile.githubusername
                     ? ''
@@ -54,8 +49,6 @@ const EditProfile = props => {
                 loading || !profile.social ? '' : profile.social.instagram
         });
     }, [loading, getCurrentProfile]);
-    // ^^^ will constantly reload: depends on [loading] prop ^^^
-    // if add profile.bio, profile.company.... it wont let us edit the fields, ignore warning
 
     const {
         company,
@@ -72,33 +65,35 @@ const EditProfile = props => {
         instagram
     } = formData;
 
-    const onChange = event =>
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        });
-
-    const onSubmit = event => {
-        event.preventDefault();
+    const onSubmit = e => {
+        e.preventDefault();
+        // console.log(e);
+        // setFormData({ ...formData, [e.target.name]: e.target.value });
         createProfile(formData, history, true);
+    };
+    const onChange = e => {
+        console.log(e.target.name);
+        console.log(e.target.value);
+
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+        console.log(formData.location);
     };
 
     return (
         <Fragment>
-            <h1 className='large text-primary'>Create Your Profile</h1>
+            <h1 className='large text-primary'>Edit Your Profile</h1>
             <p className='lead'>
-                <i className='fas fa-user'></i> Let's get some information to
-                make your profile stand out
+                <i className='fas fa-user' /> Add some changes to your profile
             </p>
             <small>* = required field</small>
-            <form className='form' onSubmit={event => onSubmit(event)}>
+            <form className='form' onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
                     <select
                         name='status'
                         value={status}
-                        onChange={event => onChange(event)}
+                        onChange={e => onChange(e)}
                     >
-                        <option value='0'>* Select Professional Status</option>
+                        <option>* Select Professional Status</option>
                         <option value='Developer'>Developer</option>
                         <option value='Junior Developer'>
                             Junior Developer
@@ -126,7 +121,7 @@ const EditProfile = props => {
                         placeholder='Company'
                         name='company'
                         value={company}
-                        onChange={event => onChange(event)}
+                        onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
                         Could be your own company or one you work for
@@ -138,7 +133,7 @@ const EditProfile = props => {
                         placeholder='Website'
                         name='website'
                         value={website}
-                        onChange={event => onChange(event)}
+                        onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
                         Could be your own or a company website
@@ -150,7 +145,7 @@ const EditProfile = props => {
                         placeholder='Location'
                         name='location'
                         value={location}
-                        onChange={event => onChange(event)}
+                        onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
                         City & state suggested (eg. Boston, MA)
@@ -162,7 +157,7 @@ const EditProfile = props => {
                         placeholder='* Skills'
                         name='skills'
                         value={skills}
-                        onChange={event => onChange(event)}
+                        onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
                         Please use comma separated values (eg.
@@ -175,7 +170,7 @@ const EditProfile = props => {
                         placeholder='Github Username'
                         name='githubusername'
                         value={githubusername}
-                        onChange={event => onChange(event)}
+                        onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
                         If you want your latest repos and a Github link, include
@@ -187,8 +182,8 @@ const EditProfile = props => {
                         placeholder='A short bio of yourself'
                         name='bio'
                         value={bio}
-                        onChange={event => onChange(event)}
-                    ></textarea>
+                        onChange={e => onChange(e)}
+                    />
                     <small className='form-text'>
                         Tell us a little about yourself
                     </small>
@@ -196,9 +191,9 @@ const EditProfile = props => {
 
                 <div className='my-2'>
                     <button
+                        onClick={() => toggleSocialInputs(!displaySocialInputs)}
                         type='button'
                         className='btn btn-light'
-                        onClick={() => toggleSocialInputs(!displaySocialInputs)}
                     >
                         Add Social Network Links
                     </button>
@@ -208,57 +203,57 @@ const EditProfile = props => {
                 {displaySocialInputs && (
                     <Fragment>
                         <div className='form-group social-input'>
-                            <i className='fab fa-twitter fa-2x'></i>
+                            <i className='fab fa-twitter fa-2x' />
                             <input
                                 type='text'
                                 placeholder='Twitter URL'
                                 name='twitter'
                                 value={twitter}
-                                onChange={event => onChange(event)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
                         <div className='form-group social-input'>
-                            <i className='fab fa-facebook fa-2x'></i>
+                            <i className='fab fa-facebook fa-2x' />
                             <input
                                 type='text'
                                 placeholder='Facebook URL'
                                 name='facebook'
                                 value={facebook}
-                                onChange={event => onChange(event)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
                         <div className='form-group social-input'>
-                            <i className='fab fa-youtube fa-2x'></i>
+                            <i className='fab fa-youtube fa-2x' />
                             <input
                                 type='text'
                                 placeholder='YouTube URL'
                                 name='youtube'
                                 value={youtube}
-                                onChange={event => onChange(event)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
                         <div className='form-group social-input'>
-                            <i className='fab fa-linkedin fa-2x'></i>
+                            <i className='fab fa-linkedin fa-2x' />
                             <input
                                 type='text'
                                 placeholder='Linkedin URL'
                                 name='linkedin'
                                 value={linkedin}
-                                onChange={event => onChange(event)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
 
                         <div className='form-group social-input'>
-                            <i className='fab fa-instagram fa-2x'></i>
+                            <i className='fab fa-instagram fa-2x' />
                             <input
                                 type='text'
                                 placeholder='Instagram URL'
                                 name='instagram'
                                 value={instagram}
-                                onChange={event => onChange(event)}
+                                onChange={e => onChange(e)}
                             />
                         </div>
                     </Fragment>

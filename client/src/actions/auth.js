@@ -8,8 +8,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_PROFILE,
-    GET_PROFILE
+    CLEAR_PROFILE
+    // GET_PROFILE
 } from './types';
 import setAuthToken from '../utilities/setAuthToken';
 
@@ -21,7 +21,7 @@ export const loadUser = () => async dispatch => {
 
     try {
         const res = await axios.get('/api/auth');
-        console.log(res);
+        // console.log(res);
         dispatch({
             type: USER_LOADED,
             payload: res.data

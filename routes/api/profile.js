@@ -93,27 +93,25 @@ router.post(
         if (instagram) profileFields.social.instagram = instagram;
 
         try {
-            let profile = await Profile.findOne({ user: req.user.id });
-            if (profile) {
-                //update
-                profile = await Profile.findOneAndUpdate(
-                    { user: req.user.id },
-                    { $set: profileFields },
-                    { new: true }
-                );
+            //update
+            let profile = await Profile.findOneAndUpdate(
+                { user: req.user.id },
+                { $set: profileFields },
+                { new: true, upsert: true }
+            );
 
-                return res.json(profile);
-            }
+            res.json(profile);
+            // }
 
             //create
-            profile = new Profile(profileFields);
-            await profile.save();
-            res.json(profile);
+            // profile = new Profile(profileFields);
+            // await profile.save();
+            // res.json(profile);
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
         }
-        console.log(profileFields.skills);
+        // console.log(profileFields.skills);
         res.send('hello');
     }
 );
@@ -283,10 +281,10 @@ router.put(
                 .isEmpty(),
             check('from', 'From date is required')
                 .not()
-                .isEmpty(),
-            check('fieldofstudy', 'Field of study is required')
-                .not()
                 .isEmpty()
+            // check('fieldofstudy', 'Field of study is required')
+            //     .not()
+            //     .isEmpty()
         ]
     ],
     async (req, res) => {
